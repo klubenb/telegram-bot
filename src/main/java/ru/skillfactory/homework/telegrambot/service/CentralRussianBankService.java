@@ -1,5 +1,6 @@
 package ru.skillfactory.homework.telegrambot.service;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ws.client.core.WebServiceTemplate;
@@ -31,6 +32,7 @@ public class CentralRussianBankService extends WebServiceTemplate {
         GetCursOnDateXmlResponse response = (GetCursOnDateXmlResponse) marshalSendAndReceive(cbrApiUrl, getCursOnDateXML);
 
         if (response == null) {
+            log.error("Could not get response from CBR Service");
             throw new IllegalStateException("Could not get response from CBR Service");
         }
 

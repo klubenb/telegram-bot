@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface ActiveChatRepository extends JpaRepository<ActiveChat, Long> {
 
     Optional<ActiveChat> findActiveChatByChatId(Long chatId);
-
 }

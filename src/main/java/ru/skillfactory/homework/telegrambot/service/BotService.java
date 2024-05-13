@@ -21,15 +21,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static ru.skillfactory.homework.telegrambot.TelegramBotCommands.*;
+
 
 @Service //Данный класс является сервисом
 @Slf4j //Подключаем логирование из Lombok'a
 @RequiredArgsConstructor
 public class BotService implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
 
-    private static final String CURRENT_RATES = "/currentrates";
-    private static final String ADD_INCOME = "/addincome";
-    private static final String ADD_SPEND = "/addspend";
 
     @Autowired
     private TelegramClient telegramClient;
@@ -61,16 +60,15 @@ public class BotService implements SpringLongPollingBot, LongPollingSingleThread
         StringBuilder responseText = new StringBuilder();
 
         if (update.getMessage().hasText() && update.hasMessage()) {
-//            // Set variables
+            // Set variables
 
             Long chatId = update.getMessage().getChatId();
             //Это основной метод, который связан с обработкой сообщений
-//        Message message = update.getMessage(); //Этой строчкой мы получаем сообщение от пользователя
             try {
                 //Тут начинается самое интересное - мы сравниваем, что прислал пользователь, и какие команды мы можем обработать. Пока что у нас только одна команда
-                if (CURRENT_RATES.equalsIgnoreCase(update.getMessage().getText())) {
+                if (update.getMessage().getText().equalsIgnoreCase(CURRENT_RATES)) {
                     log.info("Get currentRates");
-//Получаем все курсы валют на текущий момент и проходимся по ним в цикле
+                    //Получаем все курсы валют на текущий момент и проходимся по ним в цикле
                     //В данной строчке мы собираем наше текстовое сообщение
                     centralRussianBankService.getCurrenciesFromCbr().stream()
                             .map(valuteCursOnDate -> valuteCursOnDate.getName() + " - " + valuteCursOnDate.getCourse() + "\n")
@@ -104,13 +102,14 @@ public class BotService implements SpringLongPollingBot, LongPollingSingleThread
                     ActiveChat activeChat = new ActiveChat();
                     activeChat.setChatId(chatId);
                     activeChatRepository.saveAndFlush(activeChat);
-                    log.info("save chat id");
+                    log.debug("Save new chat id {}", chatId);
                 }
                 //Ниже очень примитивная обработка исключений, чуть позже мы это поправим
             } catch (TelegramApiException e) {
                 log.error("Возникла проблема соединения с ботом", e);
                 e.printStackTrace();
             } catch (Exception e) {
+                log.error("Something went wrong with service", e);
                 e.printStackTrace();
             }
         }

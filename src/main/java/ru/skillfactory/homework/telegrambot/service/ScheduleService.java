@@ -1,6 +1,7 @@
 package ru.skillfactory.homework.telegrambot.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import ru.skillfactory.homework.telegrambot.dto.cb.ValuteCursOnDate;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ScheduleService {
@@ -39,6 +41,7 @@ public class ScheduleService {
                 previousRates.addAll(currentRates);
             }
         } catch (DatatypeConfigurationException e) {
+            log.error("Error with comfiguring request body", e);
             e.printStackTrace();
         }
     }
