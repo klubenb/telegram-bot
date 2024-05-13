@@ -107,10 +107,8 @@ public class BotService implements SpringLongPollingBot, LongPollingSingleThread
                 //Ниже очень примитивная обработка исключений, чуть позже мы это поправим
             } catch (TelegramApiException e) {
                 log.error("Возникла проблема соединения с ботом", e);
-                e.printStackTrace();
             } catch (Exception e) {
                 log.error("Something went wrong with service", e);
-                e.printStackTrace();
             }
         }
     }
@@ -125,7 +123,7 @@ public class BotService implements SpringLongPollingBot, LongPollingSingleThread
             try {
                 telegramClient.execute(sendMessage);
             } catch (TelegramApiException e) {
-                e.printStackTrace();
+                log.error("Возникла проблема соединения с ботом", e);
             }
         }
     }

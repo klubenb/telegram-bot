@@ -42,7 +42,6 @@ public class ScheduleService {
             }
         } catch (DatatypeConfigurationException e) {
             log.error("Error with comfiguring request body", e);
-            e.printStackTrace();
         }
     }
 }
