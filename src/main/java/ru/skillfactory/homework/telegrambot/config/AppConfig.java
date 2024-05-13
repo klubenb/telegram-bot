@@ -50,7 +50,7 @@ public class AppConfig {
     }
 
     @Bean
-    public TelegramClient telegramClient(@Value("${bot.api.key}") String token ){
+    public TelegramClient telegramClient(@Value("${bot.api.key}") String token) {
         return new OkHttpTelegramClient(token);
     }
 }

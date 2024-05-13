@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 public class TelegramBotApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TelegramBotApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TelegramBotApplication.class, args);
+    }
 }

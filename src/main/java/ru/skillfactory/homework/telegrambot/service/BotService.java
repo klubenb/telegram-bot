@@ -12,7 +12,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
-import ru.skillfactory.homework.telegrambot.dto.cb.ValuteCursOnDate;
 import ru.skillfactory.homework.telegrambot.entity.ActiveChat;
 import ru.skillfactory.homework.telegrambot.repository.ActiveChatRepository;
 
