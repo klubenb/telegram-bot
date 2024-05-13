@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tg-bot
+    username:
+    password:
+bot:
+  api:
+    key:
+  name:
+cbr:
+  api:
+    url: http://www.cbr.ru/dailyinfowebserv/dailyinfo.asmx?wsdl
